@@ -1,17 +1,14 @@
 #ifndef ROBOKEN_INTERFACE_MOTOR
 #define ROBOKEN_INTERFACE_MOTOR
+#include <Arduino.h>
 
 class Motor {
     public:
-    void rotate(int speed, int dir){
-        if(dir == 1) {
-            this->ccw(-speed);
-        }
-        else{
-            this->cw(speed);
-        }
-    }
-    void rotate(int speed) {
+    enum class Dir {
+        CW,
+        CCW
+    };
+    virtual void rotate(int32_t speed) {
         if(speed < 0) {
             this->ccw(-speed);
         }
@@ -19,8 +16,9 @@ class Motor {
             this->cw(speed);
         }
     }
-    virtual void cw(int speed) = 0;
-    virtual void ccw(int speed) = 0;
+    virtual void rotate(Dir dir, uint16_t speed) = 0;
+    virtual void cw(uint16_t speed) = 0;
+    virtual void ccw(uint16_t speed) = 0;
 };
 
 #endif
