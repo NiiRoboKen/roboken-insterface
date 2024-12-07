@@ -8,7 +8,7 @@ class Motor {
         CW,
         CCW
     };
-    virtual void controlByVector(int32_t speed) {
+    virtual void rotateVector(int32_t speed) {
         if(speed < 0) {
             this->ccw(-speed);
         }
@@ -16,7 +16,7 @@ class Motor {
             this->cw(speed);
         }
     }
-    virtual void controlByScalar(Dir dir, uint16_t speed) {
+    virtual void rotateScalar(Dir dir, uint16_t speed) {
         if(dir == Dir::CCW) {
             this->ccw(-speed);
         }
